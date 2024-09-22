@@ -46,7 +46,7 @@
             "latitude": {"field": "Latitude", "type": "quantitative"},
             "tooltip": [
             {"field": "Location", "type": "nominal", "title": "Location"},
-            {"field": "Total Flights", "type": "quantitative", "title": "Total Flights"},
+            {"field": "Total Flights", "type": "quantitative", "title": "Total Flights"}
           ],
             "size": {
  
