@@ -60,7 +60,7 @@
             "y": {
             "field": "City1",
             "type":"nominal",
-            "axis": {"title": "Flights","domain": false}
+            "axis": {"title": "City","domain": false,"offset":5}
             },
             
             "tooltip": [
