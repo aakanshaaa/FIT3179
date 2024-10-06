@@ -55,12 +55,12 @@
             "x": {
             "field": "Month_num",
             "timeUnit": "month",
-            "axis": {"title": "Month","domain": false,}
+            "axis": {"title": "Month","domain": false}
             },
             "y": {
             "field": "City1",
             "type":"nominal",
-            "axis": {"title": "Flights","domain": false,}
+            "axis": {"title": "Flights","domain": false}
             },
             
             "tooltip": [
