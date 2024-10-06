@@ -64,7 +64,7 @@
             "field": "City1",
             "type": "nominal",
             "title": "City",
-            "scheme":"category20c"
+            "scale": {"scheme": "category20"}
           }
           
 
