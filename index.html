@@ -8,20 +8,53 @@
   
   
   <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  <link rel="stylesheet" type="text/css" href="css\styles.css" media="all">
   
 </head>
 <body>
+  <style>
+body {
+    font-family: 'Calibri', sans-serif;
+}
+
+
+h1 {text-align: center;}
+h2 {text-align: center;}
+div {text-align: center;}
+
+
+  </style>
+
   
-<div id="symbol_map"></div>
+<div class="outerrow">
+  <div>
+    <h1 >Domestic Flights for Australian Capital Cities</h1>
+    <h2 >2014-2024</h2>
+  </div>
+  <div class="innerrow">
+    <div id="symbolmap"></div>
+    <div id="symbolmap2"></div>
+  </div>
+  
+  <div id="symbolmap3"></div>
 
-<script type="text/javascript">
+</div>
 
-  var spec2 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/homeworkmao.json";
-  vegaEmbed('#symbol_map', spec2).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
+  <script type="text/javascript">
+
+    var spec2 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/homeworkmao.json";
+    var spec1 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/bubblehear.json";
+    var spec3 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/linechart.json";
+    vegaEmbed('#symbolmap', spec2).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+    vegaEmbed('#symbolmap2', spec1).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+    vegaEmbed('#symbolmap3', spec3).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
 
 </body>
 </html>
