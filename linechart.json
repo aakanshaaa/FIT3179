@@ -3,7 +3,7 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 1000,
     "height": 300,
-    "title": "Total Flights",
+    "title": "Yearly Flights",
     "layer": [
       {
         "data": {
