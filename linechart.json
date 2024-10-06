@@ -1,0 +1,75 @@
+
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 700,
+    "height": 400,
+    "title": "Flights per Capital City",
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/assignmentdata.csv",
+          "format": {"type": "csv"}
+        },
+        "transform": [
+          {"joinaggregate": [{
+          "op": "sum",
+          "field": "Aircraft_Trips",
+          "as": "TotalFlights"
+          }],
+          "groupby": ["City1"]
+          },
+          {"joinaggregate": [{
+          "op": "sum",
+          "field": "Aircraft_Trips",
+          "as": "TotalPassengers"
+          }],
+          "groupby": ["City1","Year"]
+          },
+          {"filter": {
+            "or":[
+              {"field": "City1", "equal":"MELBOURNE"},
+              {"field": "City1", "equal":"SYDNEY"},
+              {"field": "City1", "equal":"PERTH"},
+              {"field": "City1", "equal":"ADELAIDE"},
+              {"field": "City1", "equal":"CANBERRA"},
+              {"field": "City1", "equal":"DARWIN"},
+              {"field": "City1", "equal":"BRISBANE"},
+              {"field": "City1", "equal":"HOBART"}
+
+            ]
+
+          }}
+
+         ],
+        "mark": {"type": "line"},
+        "encoding": {
+            "x": {
+            "field": "Year",
+            "type": "temporal",
+            "axis": {"title": "Year"}
+            },
+            "y": {
+            "field": "TotalPassengers",
+            "type":"quantitative",
+            "axis": {"title": "Flights"}
+            },
+            "tooltip": [
+            {"field": "City1", "type": "nominal", "title": "Location"},
+            {"field": "TotalPassengers", "type": "quantitative", "title": "Flights","format":","},
+            {"field": "Year", "type": "temporal", "title": "Year","format":"%Y"}
+            
+          ]
+          ,
+            "color": {
+            "field": "City1",
+            "type": "nominal",
+            "title": "City"
+          }
+          
+
+        }
+        
+    }
+
+    ]
+  }

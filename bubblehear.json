@@ -1,0 +1,85 @@
+
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 400,
+    "title": "Peak Travel Periods",
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/assignmentdata.csv",
+          "format": {"type": "csv"}
+        },
+        "transform": [
+          {"joinaggregate": [{
+          "op": "sum",
+          "field": "Aircraft_Trips",
+          "as": "TotalFlights"
+          }],
+          "groupby": ["City1"]
+          },
+          {"joinaggregate": [{
+          "op": "mean",
+          "field": "Passenger_Trips",
+          "as": "TotalPassengers"
+          }],
+          "groupby": ["City1","Month_num"]
+          },
+          {
+            "joinaggregate": [
+              {"op": "max",
+            "field": "TotalPassengers",
+            "as": "Peakmonth"}
+              ],
+          "groupby": ["City1"]
+          },
+          {"calculate": "datum.TotalPassengers/datum.Allpassengers" ,"as": "passpercit"},
+          {"filter": {
+            "or":[
+              {"field": "City1", "equal":"MELBOURNE"},
+              {"field": "City1", "equal":"SYDNEY"},
+              {"field": "City1", "equal":"PERTH"},
+              {"field": "City1", "equal":"ADELAIDE"},
+              {"field": "City1", "equal":"CANBERRA"},
+              {"field": "City1", "equal":"DARWIN"},
+              {"field": "City1", "equal":"BRISBANE"},
+              {"field": "City1", "equal":"HOBART"}
+
+            ]
+
+          }}
+
+         ],
+        "mark": {"type": "circle"},
+        "encoding": {
+            "x": {
+            "field": "Month_num",
+            "timeUnit": "month",
+            "axis": {"title": "Month"}
+            },
+            "y": {
+            "field": "City1",
+            "type":"nominal",
+            "axis": {"title": "Flights"}
+            },
+            "tooltip": [
+            {"field": "City1", "type": "nominal", "title": "Location"},
+            {"field": "TotalPassengers", "type": "quantitative", "title": "Average Passengers","format":",.0f"},
+            {"field": "Month_num", "timeUnit": "month", "title": "Month"}  
+          ],
+            "color":{
+            "condition": [{"test": "datum.TotalPassengers == datum.Peakmonth", "value": "indianred"}],"type": "quantitative","field":"TotalPassengers"
+          }
+          ,
+            "size": {
+            "field": "TotalPassengers",
+            "type": "quantitative",
+            "title": "Average Monthly Passengers"
+          }
+
+        }
+        
+    }
+
+    ]
+  }
