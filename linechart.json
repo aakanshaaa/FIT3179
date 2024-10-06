@@ -63,7 +63,8 @@
             "color": {
             "field": "City1",
             "type": "nominal",
-            "title": "City"
+            "title": "City",
+            "scheme":"category20c"
           }
           
 
