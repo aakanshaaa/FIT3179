@@ -46,7 +46,7 @@
             "x": {
             "field": "Year",
             "timeUnit": "year",
-            "axis": {"title": "Year","grid": false}
+            "axis": {"title": "Year","grid": false, "labelSeparation" :  1 }
             },
             "y": {
             "field": "TotalPassengers",
@@ -66,9 +66,6 @@
             "title": "City",
             "scale": {"scheme": "category20"}
           }
-
-          
-
         }
         
     }
