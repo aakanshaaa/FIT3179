@@ -47,7 +47,7 @@
             "field": "Year",
             "timeUnit": "year",
             "type": "temporal",
-            "axis": {"title": "Year","grid": false}
+            "axis": {"title": "Year","grid": false,"tickCount":"year"}
             },
             "y": {
             "field": "TotalPassengers",
