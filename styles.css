@@ -6,3 +6,51 @@
 	/*height: 1000px;
 	width: 800px;*/
 }
+#symbol_map2 {
+	top:100px;
+	bottom: 100px; 
+	left: 100px;
+	right: 100px;
+	/*height: 1000px;
+	width: 800px;*/
+}
+#symbol_map3 {
+	top:100px;
+	bottom: 100px; 
+	left: 100px;
+	right: 100px;
+	/*height: 1000px;
+	width: 800px;*/
+}
+
+
+
+.outerrow {
+	display: flex;
+	flex-direction: row;
+	gap: 100px; 
+	align-items: center;
+
+}
+.innerrow {
+	display: flex;
+	flex-direction: row;
+	gap: 100px; 
+
+}
+
+
+/*.outerrow {
+	display: flex;
+	flex-direction: col;
+}
+	
+#outerrow {
+	top:200px;
+	bottom: 200px; 
+	left: 200px;
+	right: 200px;
+	/*height: 1000px;
+	width: 800px;
+}
+*/
