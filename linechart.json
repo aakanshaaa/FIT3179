@@ -45,7 +45,7 @@
         "encoding": {
             "x": {
             "field": "Year",
-            "type": "temporal",
+            "timeUnit": "year",
             "axis": {"title": "Year","grid": false}
             },
             "y": {
