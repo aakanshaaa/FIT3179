@@ -2,7 +2,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 1000,
-    "height": 400,
+    "height": 300,
     "title": "Total Flights",
     "layer": [
       {
@@ -46,12 +46,12 @@
             "x": {
             "field": "Year",
             "type": "temporal",
-            "axis": {"title": "Year"}
+            "axis": {"title": "Year","grid": false}
             },
             "y": {
             "field": "TotalPassengers",
             "type":"quantitative",
-            "axis": {"title": "Flights"}
+            "axis": {"title": "Flights","grid": false}
             },
             "tooltip": [
             {"field": "City1", "type": "nominal", "title": "Location"},
@@ -65,7 +65,8 @@
             "type": "nominal",
             "title": "City",
             "scale": {"scheme": "category20"}
-          }
+          },
+
           
 
         }
