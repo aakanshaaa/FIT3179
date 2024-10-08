@@ -1,21 +1,15 @@
 
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 450,
+    "width": 600,
     "height": 450,
-    "title": "Domestic Cargo Flights for Major Cities (2010-2023)",
+    "title": "Yearly Cargo Flights",
     "layer": [
       {
         "data": {
           "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/dom_cargo_web.csv",
           "format": {"type": "csv"}
         },
-        "params": [{
-          "name": "industry",
-          "select": {"type": "point", "fields": ["Location"]},
-          "bind": "legend"
-        }],
-        
           "transform": [
             {
               "filter": "datum.Location != 'Total domestic network'"
