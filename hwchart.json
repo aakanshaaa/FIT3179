@@ -2,7 +2,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 600,
-    "height": "container",
+    "height": 450,
     "title": "Yearly Cargo Flights",
     "layer": [
       {
