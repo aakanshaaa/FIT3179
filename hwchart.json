@@ -10,6 +10,7 @@
           "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/dom_cargo_web.csv",
           "format": {"type": "csv"}
         },
+        
           "transform": [
             {
               "filter": "datum.Location != 'Total domestic network'"
@@ -35,6 +36,7 @@
             },
             "tooltip":[
               {"field":"Year","type": "temporal","format":"%Y"},
+              {"field":"Location","type": "nominal"},
               {"field":"TotalValue","type": "quantitative","format":",","title":"Flights"}
 
             ],
