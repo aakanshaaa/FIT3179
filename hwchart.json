@@ -1,0 +1,74 @@
+
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 450,
+    "height": 450,
+    "title": "Domestic Cargo Flights for Major Cities (2010-2023)",
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/dom_cargo_web.csv",
+          "format": {"type": "csv"}
+        },
+        "params": [{
+          "name": "industry",
+          "select": {"type": "point", "fields": ["Location"]},
+          "bind": "legend"
+        }],
+        
+          "transform": [
+            {
+              "filter": "datum.Location != 'Total domestic network'"
+            },
+            {
+              "aggregate": [{"op": "sum", "field": "Value", "as": "TotalValue"}],
+              "groupby": ["Year", "Location"]
+            }
+          ],
+          
+          "mark": "line",
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "temporal",
+              "title": "Year"
+            
+            },
+            "y": {
+              "field": "TotalValue",
+              "type": "quantitative",
+              "title": "Total Value"
+            },
+            "tooltip":[{"field":"Year","type": "temporal"}
+
+            ],
+            "color": {
+            "field": "Location",
+            "type": "nominal",
+            "title": "Location",
+            "legend": {
+              "title": "Select Location",
+              "values": ["Adelaide", "Brisbane", "Melbourne", "Perth", "Sydney"]
+      }
+            },
+            "opacity": {
+              "condition": {
+                "selection": "locationSelector",
+                "value": 1
+              },
+              "value": 0
+            }
+          },
+          "selection": {
+          "locationSelector": {
+            "type": "single",
+            "fields": ["Location"],
+            "bind": "legend"
+          }
+        }
+            
+          }
+
+
+    ]
+  }
