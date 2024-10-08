@@ -37,9 +37,11 @@
             "y": {
               "field": "TotalValue",
               "type": "quantitative",
-              "title": "Total Value"
+              "title": "Flights"
             },
-            "tooltip":[{"field":"Year","type": "temporal"}
+            "tooltip":[
+              {"field":"Year","type": "temporal","format":"%Y"},
+              {"field":"TotalValue","type": "quantitative","format":",","title":"Flights"}
 
             ],
             "color": {
