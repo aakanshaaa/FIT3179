@@ -54,7 +54,7 @@
         "format": {"type": "csv"}
       },
       "transform": [
-         {"filter": {"param": "org", "empty": false}},
+         {"filter": {"param": "org", "empty": false}}
 
       ],
       "mark": {"type": "circle", "stroke": "black"},
