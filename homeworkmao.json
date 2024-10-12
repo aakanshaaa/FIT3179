@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 450,
-  "height": 400,
-  "title": "Click City to view FLight paths",
+  "width": 600,
+  "height": 600,
+  "title": "Click City to view Flight paths- double click to reset",
   "projection": {"type": "mercator"},
   "layer": [
     {
@@ -16,7 +16,7 @@
       "mark": {"type": "geoshape", "fill": "lightblue", "stroke": "white"}
     },
  {
-      "mark": {"type": "rule", "color": "#000", "opacity": 0.35},
+      "mark": {"type": "rule", "color": "#a5a4afb7", "opacity": 0.35},
       "data": {
         "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv",
         "format": {"type": "csv"}
@@ -57,40 +57,37 @@
          {"filter": {"param": "org", "empty": false}}
 
       ],
-      "mark": {"type": "circle", "stroke": "black"},
+      "mark": {"type": "circle","color":"indianred","size":50},
       "encoding": {
         "longitude": {"field": "Long2", "type": "quantitative"},
         "latitude": {"field": "Lat2", "type": "quantitative"},
         "tooltip": [
           {"field": "City2", "type": "nominal", "title": "Destination"},
-          {"field": "City1", "type": "nominal", "title": "Origin"}
+          {"field": "State2", "type": "nominal", "title": "State"}
+
          
         ],
         "color": {
-          "field": "City2",
-          "type": "nominal",
-          "title": "City",
-          "scale": {"scheme": "purpleblue"},
           "legend":null
-      
         }
       }
       
     },
      {
-      "mark": {"type": "circle"},
+      "mark": {"type": "circle","color":"steelblue"},
       "data": {
         "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv",
         "format": {"type": "csv"}
       },
       "transform": [
-        {"aggregate": [{"op": "count", "as": "routes"}], "groupby": ["City1"]},
+        {"aggregate": [{"op": "count", "as": "routes"}], "groupby": ["City1","City2"]},
+        {"joinaggregate": [{"op": "count", "as": "routes"}], "groupby": ["City1"]},
         {
           "lookup": "City1",
           "from": {
             "data": {"url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv"},
             "key": "City1",
-            "fields": ["Lat1","Long1"]
+            "fields": ["Lat1","Long1","State1"]
           }
         },
         {"filter": {
@@ -124,12 +121,29 @@
           "field": "routes",
           "type": "quantitative",
           "scale": {"rangeMax": 1000},
-          "legend": null
+          "title":"Number of Routes",
+            "legend": {
+          "title": "Number of Routes",
+          "symbolFillColor": "steelblue"
+      }
         },
         "order": {
           "field": "routes",
           "sort": "descending"
-        }
+        },
+      "opacity":{
+        "condition": {
+            "param": "org",
+            "value":1},
+            "value":0
+
+      },
+       "tooltip": [
+          {"field": "City1", "type": "nominal", "title": "City"},
+          {"field": "State1", "type": "nominal", "title": "State"},
+          {"field": "routes", "type": "quantitative", "title": "Routes"}
+         
+        ]
       }
     }
 
