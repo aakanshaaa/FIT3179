@@ -44,8 +44,9 @@
             },
             "tooltip": [
             {"field": "City1", "type": "nominal", "title": "Location"},
-            {"field": "Monthly_Trips", "type": "quantitative", "title": "Flights","format":","},
-            {"field": "Month", "timeUnit":"yearmonth"}
+            {"field": "Month", "timeUnit":"yearmonth","title":"Date"},
+            {"field": "Monthly_Trips", "type": "quantitative", "title": "Flights","format":","}
+
             
           ]
           ,
@@ -54,7 +55,7 @@
             "type": "nominal",
             "title": "Select City:",
             "scale": {"scheme": "category20"},
-            "legend":{"title": ["Select City:","Shift to compare "]
+            "legend":{"title": ["Select City:","Hold shift to compare "]
             }
           },
           "opacity": {
@@ -77,7 +78,7 @@
     {
       "data": {"values": [{}]},
       "mark": {"type": "rule", "stroke":"black", "size": 2},
-      "encoding": {"x": {"datum": {"year": "2020"}}}
+      "encoding": {"x": {"datum": {"year": 2020}}}
     },
      {
       "data": {"values": [{}]},
@@ -85,9 +86,13 @@
       "encoding": {"x": {"datum": {"year": 2022}}}
     },
     {
-      "data": {"values": [{}]},
-      "mark": {"type": "rule", "stroke":"black", "size": 2},
-      "encoding": {"x": {"datum": {"year": 2022}}}
+      "data": {"values": [{"egg":"Covid-19 Lockdown"}]},
+      "mark": {"type": "text", "stroke":"black","dy":-120,"fontSize":14},
+      "encoding": {"text": {
+       "field":"egg"
+      },
+      "x":{"datum":{"year": 2021}}}
+      
     }
     
 
