@@ -1,82 +1,138 @@
-
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 450,
   "height": 400,
-  "title": "Total Flights",
-  "projection": {"type": "equirectangular"},
+  "title": "Click City to view FLight paths",
+  "projection": {"type": "mercator"},
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/ne.json",
-        "format": {"type": "topojson", "feature": "ne_50m_admin_1_states_provinces"}
+        "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/ne.json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_50m_admin_1_states_provinces"
+        }
       },
-      "mark": {"type": "geoshape", "fill": "lightblue","stroke": "white"}
+      "mark": {"type": "geoshape", "fill": "lightblue", "stroke": "white"}
     },
-      {
+ {
+      "mark": {"type": "rule", "color": "#000", "opacity": 0.35},
       "data": {
-        "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/ne.json",
-        "format": {"type": "topojson", "feature": "ne_110m_graticules_5"}
-      },
-      "mark": {"type": "geoshape", "fill": null, "stroke": "lightsteelblue"}
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/assignmentdata.csv",
+        "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv",
         "format": {"type": "csv"}
       },
       "transform": [
-        {"joinaggregate": [{
-        "op": "sum",
-        "field": "Aircraft_Trips",
-        "as": "TotalFlights"
-        }],
-        "groupby": ["City1"]
+        {"filter": {"param": "org", "empty": false}},
+        {
+          "lookup": "City1",
+          "from": {
+            "data": {"url":  "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv"},
+            "key": "City1",
+            "fields": ["Lat1", "Long1"]
+          }
+        },
+        {
+          "lookup": "City2",
+          "from": {
+            "data": {"url":  "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv"},
+            "key": "City2",
+            "fields": ["Lat2", "Long2"]
+          },
+          "as": ["lat2", "lon2"]
+        }
+      ],
+      "encoding": {
+        "latitude": {"field": "Lat1"},
+        "longitude": {"field": "Long1"},
+        "latitude2": {"field": "lat2"},
+        "longitude2": {"field": "lon2"}
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+         {"filter": {"param": "org", "empty": false}},
+
+      ],
+      "mark": {"type": "circle", "stroke": "black"},
+      "encoding": {
+        "longitude": {"field": "Long2", "type": "quantitative"},
+        "latitude": {"field": "Lat2", "type": "quantitative"},
+        "tooltip": [
+          {"field": "City2", "type": "nominal", "title": "Destination"},
+          {"field": "City1", "type": "nominal", "title": "Origin"}
+         
+        ],
+        "color": {
+          "field": "City2",
+          "type": "nominal",
+          "title": "City",
+          "scale": {"scheme": "purpleblue"},
+          "legend":null
+      
+        }
+      }
+      
+    },
+     {
+      "mark": {"type": "circle"},
+      "data": {
+        "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+        {"aggregate": [{"op": "count", "as": "routes"}], "groupby": ["City1"]},
+        {
+          "lookup": "City1",
+          "from": {
+            "data": {"url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv"},
+            "key": "City1",
+            "fields": ["Lat1","Long1"]
+          }
         },
         {"filter": {
           "or":[
-            {"field": "City1", "equal":"MELBOURNE"},
-            {"field": "City1", "equal":"SYDNEY"},
-            {"field": "City1", "equal":"PERTH"},
-            {"field": "City1", "equal":"ADELAIDE"},
-            {"field": "City1", "equal":"CANBERRA"},
-            {"field": "City1", "equal":"DARWIN"},
-            {"field": "City1", "equal":"BRISBANE"},
-            {"field": "City1", "equal":"HOBART"}
+            {"field": "City1", "equal":"Melbourne"},
+            {"field": "City1", "equal":"Sydney"},
+            {"field": "City1", "equal":"Perth"},
+            {"field": "City1", "equal":"Adelaide"},
+            {"field": "City1", "equal":"Canberra"},
+            {"field": "City1", "equal":"Darwin"},
+            {"field": "City1", "equal":"Brisbane"},
+            {"field": "City1", "equal":"Hobart"}
 
           ]
 
         }}
-
-       ],
-      "mark": {"type": "circle","stroke":"black"},
-      "encoding": {
-          "longitude": {"field": "Long1", "type": "quantitative"},
-          "latitude": {"field": "Lat1", "type": "quantitative"},
-          "tooltip": [
-          {"field": "City1", "type": "nominal", "title": "Location"},
-          {"field": "TotalFlights", "type": "quantitative", "title": "Total Flights","format":","}
-          
-        ]
-        ,
-        "size": {
-          "field": "TotalFlights",
-          "type": "quantitative",
-          "title":"Flights"
-        },
-          "color": {
-          "field": "TotalFlights",
-          "type": "quantitative",
-          "title": "Flights",
-          "scale": {"scheme": "reds"}
+      ],
+      "params": [{
+        "name": "org",
+        "select": {
+          "type": "point",
+          "on": "click",
+          "nearest": false,
+          "fields": ["City1"]
         }
-        
-
+      }],
+      "encoding": {
+        "latitude": {"field": "Lat1"},
+        "longitude": {"field": "Long1"},
+        "size": {
+          "field": "routes",
+          "type": "quantitative",
+          "scale": {"rangeMax": 1000},
+          "legend": null
+        },
+        "order": {
+          "field": "routes",
+          "sort": "descending"
+        }
       }
-      
-  }
+    }
 
-  ]
-  ,
-    "config": {"view": {"stroke": null}}
+  ],
+  "config": {"view": {"stroke": null}}
 }
