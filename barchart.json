@@ -9,7 +9,7 @@
         "name": "city",
         "select": {"type": "point", "fields": ["City1"]},
         "value":"Melbourne",
-        "bind": {"input": "select", "options": ["Melbourne", "Sydney", "Brisbane", "Perth","Adelaide","Canberra","Hobart","Darwin"], "labels": ["Melbourne", "Sydney", "Brisbane", "Perth","Adelaide","Canberra","Hobart","Darwin"],"name": "Select Origin City"}
+        "bind": {"input": "select", "options": ["Melbourne", "Sydney", "Brisbane", "Perth","Adelaide","Canberra","Hobart","Darwin"], "labels": ["Melbourne", "Sydney", "Brisbane", "Perth","Adelaide","Canberra","Hobart","Darwin"],"name": "Select Origin City:  "}
       }
     ],
     "layer": [
