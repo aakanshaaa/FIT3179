@@ -1,9 +1,9 @@
 
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 1000,
-    "height": 400,
-    "title": "Domestic Flights through Capital Cities",
+    "width": 1050,
+    "height": 350,
+    "title": "Total Domestic Flights",
     "params": [
     {
     "name": "LowerYear",
@@ -67,7 +67,7 @@
             "axis": {"title": "Flights","grid": false}
             },
             "tooltip": [
-            {"field": "City1", "type": "nominal", "title": "Location"},
+            {"field": "City1", "type": "nominal", "title": "City"},
             {"field": "Month", "timeUnit":"yearmonth","title":"Date"},
             {"field": "Monthly_Trips", "type": "quantitative", "title": "Flights","format":","}
 
@@ -106,7 +106,7 @@
           {"filter": "datum.year >= LowerYear && datum.year <= UpperYear"}
 
          ],
-      "mark": {"type": "rule", "stroke":"black", "size": 2},
+      "mark": {"type": "rule", "stroke":"black", "size": 2,"clip": true},
       "encoding": {"x": {"datum": {"year": 2020},
       "scale": {
         "domainRaw": {"expr": "e ? null : [LowerYear, UpperYear]"}
@@ -118,7 +118,7 @@
           {"filter": "datum.year >= LowerYear && datum.year <= UpperYear"}
 
          ],
-      "mark": {"type": "rule", "stroke":"black", "size": 2},
+      "mark": {"type": "rule", "stroke":"black", "size": 2,"clip": true},
       "encoding": {"x": {"datum": {"year": 2022},"scale": {
         "domainRaw": {"expr": "e ? null : [LowerYear, UpperYear]"}
       }}
@@ -129,7 +129,7 @@
       "transform": [
           {"filter": "datum.year >= LowerYear && datum.year <= UpperYear"}
          ],
-      "mark": {"type": "text", "stroke":"black","dy":-120,"fontSize":14},
+      "mark": {"type": "text", "stroke":"black","dy":-120,"fontSize":14,"clip": true},
       "encoding": {"text": {
        "field":"egg"
       },
