@@ -28,30 +28,72 @@
 	right: 300px; 
 	align-content: center;
 	padding: 10px;
-	color: blue;
+	color: rgb(38, 38, 63);
 	/*height: 1000px;
 	width: 800px;*/
 }
 .l-box { 
-	padding: 10rem; 
-	border: 10rem solid darkcyan; 
-	background-color: beige; 
+	padding: 5rem; 
+	border: 5rem solid darkcyan; 
+	background-color: lightslategray; 
 } 
 
-
-
-.outerrow {
-	display: flex;
-	flex-direction: row;
-	gap: 100px; 
-	align-items: center;
-
+.charttext {
+	font-size: 14px;
+	text-align: left;
+	align-content: center;
 }
-.innerrow {
-	display: flex;
-	flex-direction: row;
-	gap: 100px; 
 
+
+
+body *{
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-weight: 900;
+	text-align: center;
+}
+h2 {
+
+	text-align: center;
+}
+
+body {
+    background-color: lightgray;
+}
+
+.page {
+    width: 1200px;
+    background-color: white;
+    margin: auto;
+    padding: 50px;
+    padding-top: 35px;
+}
+
+.vis-container {
+    width: 100%;
+}
+
+.description h2,
+h1 {
+    margin-top: 0px;
+}
+
+.description-right {
+    padding-left: 20px;
+}
+
+.description-left {
+    padding-right: 20px;
+}
+
+.pure-g {
+    margin-bottom: 40px;
+}
+
+.small-font {
+    font-size: 14px;
 }
 
 

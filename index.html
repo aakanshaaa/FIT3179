@@ -1,67 +1,144 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <title>Domestic Flights | Australian Capital Cities</title>
   <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-  
-  
-  <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="styles.css" media="all">
+
+  <!-- Import pure.css -->
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
     integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-</head>
-<body >
-  <div class = "1-box">
 
- <!-- pure grid group -->
-  <div class="pure-g">
-    <div class="pure-u-1-1">
-      <h1 style="text-align: center;">Domestic Flights for Australian Capital Cities</h1>
-      <h2 style="text-align: center;">2014-2024</h2>
-      <div id = "intro">
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="styles.css" media="all">
+
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>Domestic Flights</h1>
+        <h2>Australian Capital Cities</h2>
         <p style="text-align: center;">The capital cities of Australia serve as a gateway for the rest of the country, with connections possible
-           to almost anywhere in Australia via one of these cities. Understanding how these cities service domestic passengers 
-          is vital as it highlights key destinations for each city based on demand and showcases the current services available.</p>
+          to almost anywhere in Australia via one of these cities.
+        <p style="text-align: center;">Understanding how these cities service domestic passengers 
+         is vital as it highlights key destinations for each city based on demand and showcases the current services available.
+        </p>
       </div>
     </div>
-  </div>
+    <!-- end pure grid group -->
 
-  <div class="pure-g">
-    <div class="pure-u-1-2">
-          <div id="symbol_map"></div>
+   
+      <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div id="vis1" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="vis5" class="vis-container"></div>
+      </div>
     </div>
-    <div class="pure-u-1-2">
-          <div id="symbol_map2"></div>
+    <!-- end pure grid group -->
+
+     <!-- pure grid group -->
+     <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="description description-left">
+          <h3>Flight Paths</h3>
+          <p>The connnections from each capital city indicate the in-demand destinations for passengers. 
+            Larger cities have more flight routes though them such as Melbourne, Sydney and Brisbane.
+            Many regional locations are only accessible by flight interstate, 
+            espcially for larger states such as Queensland, New South Wales and Western Australia</p>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <div class="description description-left">
+          <h3>Top Destinations</h3>
+          <p>The top destinations by average passenger count for each capital city are primilary other capital cities. 
+            However, other popular destinations are tourist destinations in Queensland, 
+            such as Cairns and the Gold Coast. For Perth, many of the top destinations are interstate</p>
+        </div>
+        
+      </div>
     </div>
-</div>
+    <!-- end pure grid group -->
 
-  <div class="pure-g">
-    <div class="pure-u-1-1">
-      <div id="symbol_map3"></div>
+    
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1" >
+        <div id="vis2" class="vis-container"></div>
+      </div>
     </div>
-  </div>
-<!-- end pure grid group -->
-</div>
+    <!-- end pure grid group -->
 
-<script type="text/javascript">
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description description-left">
+          <h3>Total Flights</h3>
+          <p>During the 2010s, it can be seen that there was mininal growth in the number of flights transiting through each capital city. The peak flight periods for each city can be seen through the peaks and dips within each year. For most capital cities, flight numbers dip during February of each year.
+            </p>
+            <p>During the Covid-19 lockdowns, many flights were grounded, with minor peaks during this period corresponsing to easing lockdown restrictions.
+            However post 2021, flight numbers have not yet returned back to pre-lockdown numbers </p>
+        </div>
+      </div>
+    </div>
 
-  var spec1 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/homeworkmao.json";
-  vegaEmbed('#symbol_map', spec1, {"actions": false}).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  var spec2 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/barchart.json";
-  vegaEmbed('#symbol_map2', spec2, {"actions": false}).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-  var spec3 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/linechart.json";
-  vegaEmbed('#symbol_map3', spec3, {"actions": false}).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
+    <div class="pure-g">
+      <div class="pure-u-1-1 small-font">
 
+          <h4>Additional Information</h4>
+          <p>Name: Aakansha Yoddha</p>
+          <p>Date: 13/10/2024</p>
+          <p>Datasets</p>
+          <p>Domestic Flight Data: https://data.gov.au/data/dataset/domestic-airlines-top-routes-and-totals </p>
+          <p>Airport Data: https://data.gov.au/data/dataset/domestic-airlines-top-routes-and-totals </p>
+          <p>Map and Graticules: https://www.naturalearthdata.com/</p>
+            <p>During the Covid-19 lockdowns, many flights were grounded, with minor peaks during this period corresponsing to easing lockdown restrictions.
+            However post 2021, flight numbers have not yet returned back to pre-lockdown numbers </p>
+      </div>
+    </div>
+
+
+  </div> <!-- end page -->
+
+  <script type="text/javascript">
+    var specVis1 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/homeworkmao.json";
+    var specVis2 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/barchart.json";
+    var specVis3 = "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/linechart.json";
+
+    vegaEmbed('#vis1', specVis1, { "actions": false });
+
+    vegaEmbed('#vis2', specVis3, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis3', specVis1, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis4', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+    vegaEmbed('#vis5', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
 </body>
+
 </html>
