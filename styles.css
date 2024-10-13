@@ -53,10 +53,13 @@ body *{
 h1 {
     font-weight: 900;
 	text-align: center;
+	font-family: 'IBM Plex Mono', serif;
+	font-size: 60px;
 }
 h2 {
 
 	text-align: center;
+	font-family: 'IBM Plex Mono', serif;
 }
 
 body {
