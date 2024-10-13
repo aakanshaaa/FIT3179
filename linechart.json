@@ -4,6 +4,32 @@
     "width": 1000,
     "height": 300,
     "title": "Domestic Flights through Capital Cities",
+    "params": [
+    {
+    "name": "LowerYear",
+    "value": 2014,
+    "bind": {
+    "input": "interval",
+    "min": 2014,
+    "max": 2024,
+    "step": 1,
+    "name": "Lower Year Range: "
+    }},
+    {
+    "name": "UpperYear",
+    "value": 2024,
+    "bind": {
+    "input": "interval",
+    "min": 2014,
+    "max": 2024,
+    "step": 1,
+    "name": "Upper Year Range: "
+    }},
+    {
+      "name":"e",
+      "value":true
+    }
+],
     "layer": [
       {
         "data": {
@@ -14,9 +40,6 @@
           {"joinaggregate": [{"op": "sum","field": "Aircraft_Trips","as": "Monthly_Trips"}
           ],
           "groupby": ["City1","Month"]},
-          {
-            "calculate": "'Shift select for muliple cities'","as":"labell"
-          },
           {"filter": {
             "or":[
               {"field": "City1", "equal":"Melbourne"},
@@ -29,7 +52,8 @@
               {"field": "City1", "equal":"Hobart"}
 
             ]
-          }}
+          }},
+          {"filter": "datum.Year >= LowerYear && datum.Year <= UpperYear"}
 
          ],
         "mark": {"type": "line"},
@@ -76,22 +100,44 @@
         
     },
     {
-      "data": {"values": [{}]},
+      "data": {"values": [{"year":"2020"}]},
+      
+        "transform": [
+          {"filter": "datum.year >= LowerYear && datum.year <= UpperYear"}
+
+         ],
       "mark": {"type": "rule", "stroke":"black", "size": 2},
-      "encoding": {"x": {"datum": {"year": 2020}}}
-    },
+      "encoding": {"x": {"datum": {"year": 2020},
+      "scale": {
+        "domainRaw": {"expr": "e ? null : [LowerYear, UpperYear]"}
+      }}
+      }},
      {
-      "data": {"values": [{}]},
+      "data": {"values": [{"year":"2022"}]},
+       "transform": [
+          {"filter": "datum.year >= LowerYear && datum.year <= UpperYear"}
+
+         ],
       "mark": {"type": "rule", "stroke":"black", "size": 2},
-      "encoding": {"x": {"datum": {"year": 2022}}}
+      "encoding": {"x": {"datum": {"year": 2022},"scale": {
+        "domainRaw": {"expr": "e ? null : [LowerYear, UpperYear]"}
+      }}
+      }
     },
     {
-      "data": {"values": [{"egg":"Covid-19 Lockdown"}]},
+      "data": {"values": [{"egg":"Covid-19 Lockdown","year":"2021"}]},
+      "transform": [
+          {"filter": "datum.year >= LowerYear && datum.year <= UpperYear"}
+         ],
       "mark": {"type": "text", "stroke":"black","dy":-120,"fontSize":14},
       "encoding": {"text": {
        "field":"egg"
       },
-      "x":{"datum":{"year": 2021}}}
+      "x":{"datum":{"year": 2021},
+      "scale": {
+        "domainRaw": {"expr": "e ? null : [LowerYear, UpperYear]"}
+      }}}
+      
       
     }
     
