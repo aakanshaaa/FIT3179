@@ -1,0 +1,70 @@
+
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 1000,
+    "height": 300,
+    "title": "Top Destinations for Capital Cities",
+    "params": [
+      {
+        "name": "city",
+        "select": {"type": "point", "fields": ["City1"]},
+        "value":"Melbourne",
+        "bind": {"input": "select", "options": ["Melbourne", "Sydney", "Brisbane", "Perth","Adelaide","Canberra","Hobart","Darwin"], "labels": ["Melbourne", "Sydney", "Brisbane", "Perth","Adelaide","Canberra","Hobart","Darwin"],"name": "Select Origin City"}
+      }
+    ],
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv",
+          "format": {"type": "csv"}
+        },
+        "transform": [
+          {"aggregate": [{"op": "mean","field": "Passenger_Trips","as": "Avg_Passengers"}
+          ],
+          "groupby": ["City1","City2"]},
+      
+          {"filter": {"param": "city", "empty": false}},
+          {
+              "window": [{
+                "op": "rank",
+                "as": "rank"
+              }],
+              "sort": [{ "field": "Avg_Passengers", "order": "descending" }]
+            }, {
+              "filter": "datum.rank <= 8"
+            }
+
+         ],
+        "mark": {"type": "bar"},
+        "encoding": {
+            "x": {"field":"City2","type":"nominal","title":"Destination City",
+                        "sort": {"field": "Avg_Passengers", "op": "sum","order":"descending"}
+            },
+            "y": {
+            "field": "Avg_Passengers",
+            "type":"quantitative",
+            "axis": {"title": "Average Yearly Passengers","grid": false}
+
+            },
+            "tooltip": [
+            {"field": "City2", "type": "nominal", "title": "Destination City"},
+            {"field": "City1", "type": "nominal", "title": "Origin City"},
+            {"field": "Avg_Passengers", "type": "quantitative", "title": "Average Passengers","format":",.0f"}
+
+            
+          ]
+          ,
+            "color": {
+            "field": "City1",
+            "type": "nominal",
+            "title": "Select City:",
+            "scale": {"scheme": "category20"},
+            "legend":{"title": "Origin City"
+            }
+          }
+        }
+        
+    }
+    
+    ]
+  }
