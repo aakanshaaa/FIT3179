@@ -1,15 +1,15 @@
 #symbol_map {
 	top:100px;
 	bottom: 100px; 
-	left: 100px;
-	right: 100px;
+	left: 50px;
+	right: 0px;
 	/*height: 1000px;
 	width: 800px;*/
 }
 #symbol_map2 {
 	top:100px;
 	bottom: 100px; 
-	left: 100px;
+	left: 0px;
 	right: 100px;
 	/*height: 1000px;
 	width: 800px;*/
@@ -17,11 +17,26 @@
 #symbol_map3 {
 	top:100px;
 	bottom: 100px; 
-	left: 100px;
-	right: 100px;
+	left: 50px;
+	right: 100px; 
 	/*height: 1000px;
 	width: 800px;*/
 }
+#intro {
+	bottom: 100px; 
+	left: 300px;
+	right: 300px; 
+	align-content: center;
+	padding: 10px;
+	color: blue;
+	/*height: 1000px;
+	width: 800px;*/
+}
+.l-box { 
+	padding: 10rem; 
+	border: 10rem solid darkcyan; 
+	background-color: beige; 
+} 
 
 
 
