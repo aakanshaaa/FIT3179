@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 500,
-  "height": 500,
+  "height": 450,
   "title": "Click City to view Flight paths- double click to reset",
   "projection": {"type": "mercator"},
   "layer": [
