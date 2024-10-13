@@ -31,7 +31,7 @@
               }],
               "sort": [{ "field": "Avg_Passengers", "order": "descending" }]
             }, {
-              "filter": "datum.rank <= 8"
+              "filter": "datum.rank <= 10"
             }
 
          ],
