@@ -1,75 +1,146 @@
 
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 1000,
-    "height": 300,
-    "title": "Yearly Flights",
+    "width": 1200,
+    "height": 400,
+    "title": "Domestic Flights through Capital Cities",
+    "params": [
+    {
+    "name": "LowerYear",
+    "value": 2014,
+    "bind": {
+    "input": "interval",
+    "min": 2014,
+    "max": 2024,
+    "step": 1,
+    "name": "Lower Year Range: "
+    }},
+    {
+    "name": "UpperYear",
+    "value": 2024,
+    "bind": {
+    "input": "interval",
+    "min": 2014,
+    "max": 2024,
+    "step": 1,
+    "name": "Upper Year Range: "
+    }},
+    {
+      "name":"e",
+      "value":true
+    }
+],
     "layer": [
       {
         "data": {
-          "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/main/assignmentdata.csv",
+          "url": "https://raw.githubusercontent.com/aakanshaaa/FIT3179/refs/heads/vis2/assignmentdata.csv",
           "format": {"type": "csv"}
         },
         "transform": [
-          {"joinaggregate": [{
-          "op": "sum",
-          "field": "Aircraft_Trips",
-          "as": "TotalFlights"
-          }],
-          "groupby": ["City1"]
-          },
-          {"joinaggregate": [{
-          "op": "sum",
-          "field": "Aircraft_Trips",
-          "as": "TotalPassengers"
-          }],
-          "groupby": ["City1","Year"]
-          },
+          {"joinaggregate": [{"op": "sum","field": "Aircraft_Trips","as": "Monthly_Trips"}
+          ],
+          "groupby": ["City1","Month"]},
           {"filter": {
             "or":[
-              {"field": "City1", "equal":"MELBOURNE"},
-              {"field": "City1", "equal":"SYDNEY"},
-              {"field": "City1", "equal":"PERTH"},
-              {"field": "City1", "equal":"ADELAIDE"},
-              {"field": "City1", "equal":"CANBERRA"},
-              {"field": "City1", "equal":"DARWIN"},
-              {"field": "City1", "equal":"BRISBANE"},
-              {"field": "City1", "equal":"HOBART"}
+              {"field": "City1", "equal":"Melbourne"},
+              {"field": "City1", "equal":"Sydney"},
+              {"field": "City1", "equal":"Perth"},
+              {"field": "City1", "equal":"Adelaide"},
+              {"field": "City1", "equal":"Canberra"},
+              {"field": "City1", "equal":"Darwin"},
+              {"field": "City1", "equal":"Brisbane"},
+              {"field": "City1", "equal":"Hobart"}
 
             ]
-
-          }}
+          }},
+          {"filter": "datum.Year >= LowerYear && datum.Year <= UpperYear"}
 
          ],
         "mark": {"type": "line"},
         "encoding": {
-            "x": {
-            "field": "Year",
-            "timeUnit": "year",
-            "type": "temporal",
-            "axis": {"title": "Year","grid": false,"tickCount":"year"}
+            "x": {"field":"Month","timeUnit": "yearmonth",
+            "axis": {"title": "Year","grid": true,"tickCount": "year"}
             },
             "y": {
-            "field": "TotalPassengers",
+            "field": "Monthly_Trips",
             "type":"quantitative",
             "axis": {"title": "Flights","grid": false}
             },
             "tooltip": [
             {"field": "City1", "type": "nominal", "title": "Location"},
-            {"field": "TotalPassengers", "type": "quantitative", "title": "Flights","format":","},
-            {"field": "Year", "type": "temporal", "title": "Year","format":"%Y"}
+            {"field": "Month", "timeUnit":"yearmonth","title":"Date"},
+            {"field": "Monthly_Trips", "type": "quantitative", "title": "Flights","format":","}
+
             
           ]
           ,
             "color": {
             "field": "City1",
             "type": "nominal",
-            "title": "City",
-            "scale": {"scheme": "category20"}
+            "title": "Select City:",
+            "scale": {"scheme": "category20"},
+            "legend":{"title": ["Select City:","Hold shift to compare "]
+            }
+          },
+          "opacity": {
+              "condition": {
+                "selection": "locationSelector",
+                "value": 1
+              },
+              "value": 0
+            }
+        },
+          "selection": {
+          "locationSelector": {
+            "type": "multi",
+            "fields": ["City1"],
+            "bind": "legend"
           }
         }
         
+    },
+    {
+      "data": {"values": [{"year":"2020"}]},
+      
+        "transform": [
+          {"filter": "datum.year >= LowerYear && datum.year <= UpperYear"}
+
+         ],
+      "mark": {"type": "rule", "stroke":"black", "size": 2},
+      "encoding": {"x": {"datum": {"year": 2020},
+      "scale": {
+        "domainRaw": {"expr": "e ? null : [LowerYear, UpperYear]"}
+      }}
+      }},
+     {
+      "data": {"values": [{"year":"2022"}]},
+       "transform": [
+          {"filter": "datum.year >= LowerYear && datum.year <= UpperYear"}
+
+         ],
+      "mark": {"type": "rule", "stroke":"black", "size": 2},
+      "encoding": {"x": {"datum": {"year": 2022},"scale": {
+        "domainRaw": {"expr": "e ? null : [LowerYear, UpperYear]"}
+      }}
+      }
+    },
+    {
+      "data": {"values": [{"egg":"Covid-19 Lockdown","year":"2021"}]},
+      "transform": [
+          {"filter": "datum.year >= LowerYear && datum.year <= UpperYear"}
+         ],
+      "mark": {"type": "text", "stroke":"black","dy":-120,"fontSize":14},
+      "encoding": {"text": {
+       "field":"egg"
+      },
+      "x":{"datum":{"year": 2021},
+      "scale": {
+        "domainRaw": {"expr": "e ? null : [LowerYear, UpperYear]"}
+      }}}
+      
+      
     }
+    
 
     ]
   }
